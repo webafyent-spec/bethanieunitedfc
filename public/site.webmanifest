@@ -1,0 +1,13 @@
+{
+  "name": "Bethanie United Football Club",
+  "short_name": "Bethanie United FC",
+  "description": "Community youth football club in Bethanie, North West Province, South Africa.",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2a1454",
+  "theme_color": "#d4a73b"
+}

@@ -1,0 +1,1000 @@
+---
+import '../styles/global.css';
+
+const DOMAIN = 'https://www.bethanieunitedfc.co.za';
+const URL = `${DOMAIN}/`;
+const NAME = 'Bethanie United Football Club';
+const LEGAL_NAME = 'Bethanie United Football Club NPC';
+const REG_NO = '2026/444177/08';
+const PHONE = '+27120018488';
+const PHONE_DISPLAY = '012 001 8488';
+const ADDRESS = '10230 Otlotleng Section, Bethanie, Brits, North West, 0270';
+const LAT = -25.5548;
+const LNG = 27.6092;
+
+const TITLE = 'Bethanie United FC | Youth Football Club North West';
+const DESCRIPTION =
+  'Registered non-profit football club in Bethanie, North West Province. Youth development from U11 to senior, community programmes and sponsorship.';
+
+const teams = [
+  'Under 11',
+  'Under 13',
+  'Under 15',
+  'Under 17',
+  'Under 19',
+  'Senior Team',
+];
+
+const missions = [
+  {
+    title: 'Develop Football Talent',
+    text: 'Identify and nurture footballing ability in Bethanie’s young people through structured coaching across six age groups.',
+  },
+  {
+    title: 'Promote Healthy Lifestyles',
+    text: 'Use regular training and competition to keep young people active, healthy and away from negative social influences.',
+  },
+  {
+    title: 'Encourage Education',
+    text: 'Put schoolwork first, supporting every player to succeed in the classroom as well as on the pitch.',
+  },
+  {
+    title: 'Build Community Pride',
+    text: 'Give Bethanie a team to rally behind, strengthening identity and social cohesion across the village.',
+  },
+  {
+    title: 'Foster Leadership',
+    text: 'Grow captains, coaches, referees and administrators who lead both in football and in the community.',
+  },
+];
+
+const impact = [
+  {
+    title: 'Youth Unemployment',
+    text: 'Football keeps young people engaged, builds discipline and opens pathways into coaching, refereeing and sports administration careers.',
+  },
+  {
+    title: 'Sporting Opportunities',
+    text: 'Organised sport is scarce in Bethanie. The club brings structured, competitive football to a village that needs it.',
+  },
+  {
+    title: 'Social Challenges',
+    text: 'Training, matches and mentorship offer a positive alternative to crime, substance abuse and idleness.',
+  },
+  {
+    title: 'Positive Role Models',
+    text: 'Coaches, senior players and directors model the values of passion, unity and excellence for the next generation.',
+  },
+];
+
+const directors = [
+  'Mr. Nkululeko Ambrocious More',
+  'Mr. Sheperd Itumeleng More',
+  'Ms. Carol Mathule',
+];
+
+const faqs = [
+  {
+    q: 'How do I register my child to play for Bethanie United FC?',
+    a: 'Bethanie United FC fields teams in six age groups: Under 11, Under 13, Under 15, Under 17, Under 19 and a Senior team. To register a player, email info@bethanieunitedfc.co.za or phone 012 001 8488 and our administrators will guide you through the digital registration process.',
+  },
+  {
+    q: 'Where is Bethanie United Football Club based?',
+    a: 'Bethanie United FC is based in Bethanie village near Brits, in the Madibeng area of South Africa’s North West Province. Our registered office is at 10230 Otlotleng Section, Bethanie, Brits, North West, 0270.',
+  },
+  {
+    q: 'How can my company sponsor Bethanie United FC?',
+    a: 'We offer team jersey sponsorship, match-day branding and digital campaign packages, each giving your brand visibility across Bethanie and the wider Madibeng community. Supporting a registered non-profit football club is also a meaningful CSI investment. Email sponsorships@bethanieunitedfc.co.za to receive our sponsorship options.',
+  },
+  {
+    q: 'Is Bethanie United FC a registered non-profit?',
+    a: 'Yes. Bethanie United Football Club NPC is a registered Non-Profit Company, incorporated with the CIPC on 4 June 2026 under registration number 2026/444177/08.',
+  },
+  {
+    q: 'What age groups can join Bethanie United FC?',
+    a: 'The club fields six teams: Under 11, Under 13, Under 15, Under 17, Under 19 and a Senior team. Players progress through a structured pathway from grassroots football to senior competitive level.',
+  },
+  {
+    q: 'What does the club do beyond football?',
+    a: 'Beyond match play, Bethanie United FC runs school football programmes, holiday soccer clinics, leadership development, anti-drug awareness campaigns and health and wellness initiatives. It also develops local talent off the pitch through coaching clinics, referee development and football administration training.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': ['SportsOrganization', 'NonprofitOrganization'],
+      '@id': `${DOMAIN}/#club`,
+      name: NAME,
+      legalName: LEGAL_NAME,
+      alternateName: ['Bethanie United FC', 'The Crocodiles of Bethanie', 'BUFC'],
+      sport: 'Soccer',
+      foundingDate: '2026-06-04',
+      identifier: {
+        '@type': 'PropertyValue',
+        propertyID: 'CIPC Registration',
+        value: REG_NO,
+      },
+      slogan: 'Passion • Unity • Excellence',
+      description:
+        'Community youth football club in Bethanie village near Brits, North West Province, South Africa. A registered Non-Profit Company developing players from Under 11 to senior level through football, community and talent development programmes.',
+      telephone: PHONE,
+      email: 'info@bethanieunitedfc.co.za',
+      url: URL,
+      logo: `${DOMAIN}/icon-512.png`,
+      image: `${DOMAIN}/og-image.jpg`,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '10230 Otlotleng Section',
+        addressLocality: 'Bethanie',
+        addressRegion: 'North West',
+        postalCode: '0270',
+        addressCountry: 'ZA',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: LAT,
+        longitude: LNG,
+      },
+      areaServed: [
+        'Bethanie',
+        'Brits',
+        'Madibeng Local Municipality',
+        'North West Province',
+        'South Africa',
+      ],
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          contactType: 'General Enquiries',
+          email: 'info@bethanieunitedfc.co.za',
+          telephone: PHONE,
+          areaServed: 'ZA',
+          availableLanguage: ['English'],
+        },
+        {
+          '@type': 'ContactPoint',
+          contactType: 'Sponsorships',
+          email: 'sponsorships@bethanieunitedfc.co.za',
+          areaServed: 'ZA',
+          availableLanguage: ['English'],
+        },
+      ],
+      member: directors.map((name) => ({
+        '@type': 'Person',
+        name,
+        jobTitle: 'Director',
+      })),
+      knowsAbout: [
+        'youth football development',
+        'community sport',
+        'football coaching',
+        'grassroots soccer South Africa',
+      ],
+    },
+    ...teams.map((team) => ({
+      '@type': 'SportsTeam',
+      '@id': `${DOMAIN}/#team-${team.toLowerCase().replace(/\s+/g, '-')}`,
+      name: `Bethanie United FC ${team}`,
+      sport: 'Soccer',
+      memberOf: { '@id': `${DOMAIN}/#club` },
+    })),
+    {
+      '@type': 'WebSite',
+      '@id': `${DOMAIN}/#website`,
+      url: URL,
+      name: NAME,
+      inLanguage: 'en-ZA',
+      publisher: { '@id': `${DOMAIN}/#club` },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${DOMAIN}/#faq`,
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+
+const navLinks = [
+  { href: '#about', label: 'About' },
+  { href: '#programmes', label: 'Programmes' },
+  { href: '#sponsorship', label: 'Sponsorship' },
+  { href: '#contact', label: 'Contact' },
+];
+---
+
+<!doctype html>
+<html lang="en-ZA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{TITLE}</title>
+    <meta name="description" content={DESCRIPTION} />
+    <link rel="canonical" href={URL} />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="theme-color" content="#2a1454" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={URL} />
+    <meta property="og:site_name" content={NAME} />
+    <meta property="og:title" content={TITLE} />
+    <meta property="og:description" content={DESCRIPTION} />
+    <meta property="og:image" content={`${DOMAIN}/og-image.jpg`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Bethanie United FC crest on a purple and gold background with the tagline Building Champions On and Off the Field"
+    />
+    <meta property="og:locale" content="en_ZA" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={URL} />
+    <meta name="twitter:title" content={TITLE} />
+    <meta name="twitter:description" content={DESCRIPTION} />
+    <meta name="twitter:image" content={`${DOMAIN}/og-image.jpg`} />
+
+    <!-- Geo -->
+    <meta
+      name="geo.placename"
+      content="Bethanie, Brits, Madibeng, North West Province, South Africa"
+    />
+    <meta name="geo.position" content={`${LAT};${LNG}`} />
+    <meta name="ICBM" content={`${LAT}, ${LNG}`} />
+    <meta name="geo.region" content="ZA-NW" />
+
+    <!-- Dublin Core -->
+    <meta name="DC.title" content={TITLE} />
+    <meta name="DC.description" content={DESCRIPTION} />
+    <meta
+      name="DC.subject"
+      content="Youth Football, Community Sport, North West Province"
+    />
+    <meta
+      name="DC.coverage"
+      content="Bethanie, Brits, Madibeng, North West Province, South Africa"
+    />
+    <meta name="DC.language" content="en-ZA" />
+    <meta name="DC.publisher" content={LEGAL_NAME} />
+    <meta name="DC.creator" content={LEGAL_NAME} />
+    <meta name="DC.identifier" content={URL} />
+
+    <!-- Icons & manifest -->
+    <link rel="icon" href="/icon-192.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Fonts: Archivo Black (display) + Inter 400/600/700 (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;700&display=swap"
+      />
+    </noscript>
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+
+  <body class="bg-purple-950 font-body text-cream">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- ═══ NAV ═══ -->
+    <header class="fixed inset-x-0 top-0 z-50 border-b border-gold-500/20 bg-purple-950/90 backdrop-blur">
+      <nav aria-label="Main navigation" class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+        <a href="#top" class="flex items-center gap-3">
+          <img src="/img/crest.webp" alt="Bethanie United FC crest" width="44" height="44" loading="eager" decoding="async" class="h-11 w-11" />
+          <span class="font-display text-sm leading-tight tracking-wide text-cream sm:text-base">
+            BETHANIE UNITED <span class="text-gold-500">FC</span>
+          </span>
+        </a>
+
+        <button
+          id="nav-toggle"
+          type="button"
+          class="rounded border border-gold-500/40 p-2 text-gold-400 md:hidden"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label="Toggle navigation menu"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        <div
+          id="nav-menu"
+          class="absolute left-0 right-0 top-full flex-col gap-1 border-b border-gold-500/20 bg-purple-950 px-4 py-4 md:static md:flex-row md:items-center md:gap-7 md:border-0 md:bg-transparent md:p-0"
+        >
+          {navLinks.map(({ href, label }) => (
+            <a href={href} class="py-2 text-sm font-semibold text-cream transition hover:text-gold-400 md:py-0">
+              {label}
+            </a>
+          ))}
+          <a
+            href="#sponsorship"
+            class="mt-2 inline-block rounded bg-gold-500 px-4 py-2 text-center text-sm font-bold text-purple-950 transition hover:bg-gold-400 md:mt-0"
+          >
+            Become a Sponsor
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <!-- ═══ 01 HERO ═══ -->
+      <section id="top" class="relative flex min-h-screen items-center overflow-hidden pt-20" aria-label="Introduction">
+        <picture>
+          <source srcset="/img/hero.avif" type="image/avif" />
+          <source srcset="/img/hero.webp" type="image/webp" />
+          <img
+            src="/img/hero.webp"
+            alt="Stadium-style purple and gold backdrop with the Bethanie United FC crest"
+            width="1600"
+            height="900"
+            fetchpriority="high"
+            loading="eager"
+            decoding="async"
+            class="absolute inset-0 h-full w-full object-cover"
+          />
+        </picture>
+        <div class="absolute inset-0 bg-gradient-to-t from-purple-950 via-purple-950/70 to-purple-900/40" aria-hidden="true"></div>
+
+        <div class="relative mx-auto w-full max-w-6xl px-4 py-24 sm:px-6">
+          <p class="mb-4 text-sm font-bold uppercase tracking-[0.25em] text-gold-400">
+            The Crocodiles of Bethanie · Est. 2026
+          </p>
+          <h1 class="font-display max-w-4xl text-4xl leading-tight text-cream sm:text-5xl lg:text-6xl">
+            Bethanie United Football Club —
+            <span class="text-gold-500">Youth Football Development</span>
+            in North West Province
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg text-lav sm:text-xl">
+            Building Champions On and Off the Field
+          </p>
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a
+              href="#contact"
+              class="rounded bg-gold-500 px-7 py-3.5 font-bold text-purple-950 transition hover:bg-gold-400"
+            >
+              Register a Player
+            </a>
+            <a
+              href="#sponsorship"
+              class="rounded border-2 border-gold-500 px-7 py-3.5 font-bold text-gold-400 transition hover:bg-gold-500 hover:text-purple-950"
+            >
+              Become a Sponsor
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 02 ABOUT ═══ -->
+      <section id="about" aria-labelledby="about-h" class="croc-scales border-t border-gold-500/10 bg-purple-900">
+        <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
+          <div class="reveal mb-12 flex items-end gap-5">
+            <span class="section-num" aria-hidden="true">01</span>
+            <h2 id="about-h" class="font-display text-2xl text-cream sm:text-4xl">
+              A Community Football Club in Bethanie, <span class="text-gold-500">North West</span>
+            </h2>
+          </div>
+
+          <div class="grid gap-10 lg:grid-cols-5">
+            <div class="reveal space-y-5 text-lav lg:col-span-3">
+              <p>
+                Bethanie United Football Club is a community football club rooted in Bethanie
+                village near Brits, in the Madibeng area of the North West Province. Founded by
+                community leaders who believe sport can change lives, the club was registered with
+                the CIPC as a Non-Profit Company on 4 June 2026, under registration number
+                {REG_NO}.
+              </p>
+              <p>
+                We exist for four reasons: <strong class="text-cream">youth development</strong>,
+                <strong class="text-cream">football excellence</strong>,
+                <strong class="text-cream">social cohesion</strong> and
+                <strong class="text-cream">community empowerment</strong>. Every training session,
+                match and community programme is designed to give the young people of Bethanie a
+                structured, positive path — on and off the field.
+              </p>
+              <img
+                src="/img/pitch.webp"
+                alt="Illustrated football pitch in Bethanie United FC purple and gold"
+                width="1200"
+                height="675"
+                loading="lazy"
+                decoding="async"
+                class="mt-4 rounded-lg border border-gold-500/20"
+              />
+            </div>
+
+            <!-- Club identity fact card -->
+            <aside class="reveal lg:col-span-2" aria-label="Club identity facts">
+              <div class="rounded-lg border border-gold-500/30 bg-purple-950 p-7">
+                <h3 class="font-display mb-6 text-lg text-gold-500">Club Identity</h3>
+                <dl class="space-y-4 text-sm">
+                  <div>
+                    <dt class="font-bold uppercase tracking-wider text-gold-400">Nickname</dt>
+                    <dd class="mt-1 text-cream">The Crocodiles of Bethanie</dd>
+                  </div>
+                  <div>
+                    <dt class="font-bold uppercase tracking-wider text-gold-400">Mascot</dt>
+                    <dd class="mt-1 text-cream">Crocodile (Kwena)</dd>
+                  </div>
+                  <div>
+                    <dt class="font-bold uppercase tracking-wider text-gold-400">Colours</dt>
+                    <dd class="mt-1 text-cream">Purple and Gold</dd>
+                  </div>
+                  <div>
+                    <dt class="font-bold uppercase tracking-wider text-gold-400">Motto</dt>
+                    <dd class="mt-1 text-cream">Passion • Unity • Excellence</dd>
+                  </div>
+                  <div>
+                    <dt class="font-bold uppercase tracking-wider text-gold-400">Location</dt>
+                    <dd class="mt-1 text-cream">Bethanie, Brits, Madibeng, North West Province</dd>
+                  </div>
+                  <div>
+                    <dt class="font-bold uppercase tracking-wider text-gold-400">Founded</dt>
+                    <dd class="mt-1 text-cream">4 June 2026 (CIPC NPC, reg no. {REG_NO})</dd>
+                  </div>
+                </dl>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 03 MISSION & VISION ═══ -->
+      <section id="mission" aria-labelledby="mission-h" class="bg-purple-950">
+        <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
+          <div class="reveal mb-8 flex items-end gap-5">
+            <span class="section-num" aria-hidden="true">02</span>
+            <h2 id="mission-h" class="font-display text-2xl text-cream sm:text-4xl">
+              Mission &amp; <span class="text-gold-500">Vision</span>
+            </h2>
+          </div>
+
+          <p class="reveal mb-12 max-w-3xl border-l-4 border-gold-500 pl-5 text-lg text-lav">
+            <strong class="text-cream">Our vision:</strong> to become the leading football
+            development institution in the North West Province — a club where talent from Bethanie
+            and surrounding communities can rise from grassroots to elite level.
+          </p>
+
+          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {missions.map(({ title, text }) => (
+              <div class="reveal rounded-lg border border-gold-500/20 bg-purple-900 p-6">
+                <h3 class="font-display mb-3 text-base text-gold-500">{title}</h3>
+                <p class="text-sm text-lav">{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 04 COMMUNITY IMPACT ═══ -->
+      <section id="impact" aria-labelledby="impact-h" class="croc-scales bg-purple-900">
+        <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
+          <div class="reveal mb-12 flex items-end gap-5">
+            <span class="section-num" aria-hidden="true">03</span>
+            <h2 id="impact-h" class="font-display text-2xl text-cream sm:text-4xl">
+              Building Stronger Communities <span class="text-gold-500">Through Football</span>
+            </h2>
+          </div>
+
+          <div class="grid gap-6 sm:grid-cols-2">
+            {impact.map(({ title, text }) => (
+              <div class="reveal rounded-lg border border-gold-500/20 bg-purple-950 p-7">
+                <h3 class="font-display mb-3 text-base text-gold-500">{title}</h3>
+                <p class="text-sm text-lav">{text}</p>
+              </div>
+            ))}
+          </div>
+
+          <p class="reveal mt-10 max-w-3xl text-lg text-cream">
+            Bethanie United FC is working to become a central pillar of youth development in
+            Bethanie and its surrounding communities.
+          </p>
+        </div>
+      </section>
+
+      <!-- ═══ 05 PROGRAMMES ═══ -->
+      <section id="programmes" aria-labelledby="programmes-h" class="bg-purple-950">
+        <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
+          <div class="reveal mb-12 flex items-end gap-5">
+            <span class="section-num" aria-hidden="true">04</span>
+            <h2 id="programmes-h" class="font-display text-2xl text-cream sm:text-4xl">
+              Football &amp; Youth Development <span class="text-gold-500">Programmes</span>
+            </h2>
+          </div>
+
+          <div class="grid gap-8 lg:grid-cols-3">
+            <article class="reveal overflow-hidden rounded-lg border border-gold-500/20 bg-purple-900">
+              <img src="/img/team.webp" alt="Football development programme illustration in club colours" width="800" height="600" loading="lazy" decoding="async" class="h-44 w-full object-cover" />
+              <div class="p-7">
+                <h3 class="font-display mb-4 text-lg text-gold-500">Football Development</h3>
+                <p class="mb-4 text-sm text-lav">
+                  Structured coaching and competitive football across six teams:
+                </p>
+                <ul class="space-y-2 text-sm text-cream">
+                  {teams.map((team) => (
+                    <li class="flex items-center gap-3">
+                      <span class="h-1.5 w-4 bg-gold-500" aria-hidden="true"></span>
+                      {team}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+
+            <article class="reveal overflow-hidden rounded-lg border border-gold-500/20 bg-purple-900">
+              <img src="/img/community.webp" alt="Community development programme illustration in club colours" width="800" height="600" loading="lazy" decoding="async" class="h-44 w-full object-cover" />
+              <div class="p-7">
+                <h3 class="font-display mb-4 text-lg text-gold-500">Community Development</h3>
+                <ul class="space-y-2 text-sm text-cream">
+                  <li class="flex items-center gap-3"><span class="h-1.5 w-4 bg-gold-500" aria-hidden="true"></span>School football programmes</li>
+                  <li class="flex items-center gap-3"><span class="h-1.5 w-4 bg-gold-500" aria-hidden="true"></span>Holiday soccer clinics</li>
+                  <li class="flex items-center gap-3"><span class="h-1.5 w-4 bg-gold-500" aria-hidden="true"></span>Leadership development</li>
+                  <li class="flex items-center gap-3"><span class="h-1.5 w-4 bg-gold-500" aria-hidden="true"></span>Anti-drug awareness</li>
+                  <li class="flex items-center gap-3"><span class="h-1.5 w-4 bg-gold-500" aria-hidden="true"></span>Health &amp; wellness initiatives</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="reveal overflow-hidden rounded-lg border border-gold-500/20 bg-purple-900">
+              <img src="/img/talent.webp" alt="Talent development programme illustration in club colours" width="800" height="600" loading="lazy" decoding="async" class="h-44 w-full object-cover" />
+              <div class="p-7">
+                <h3 class="font-display mb-4 text-lg text-gold-500">Talent Development</h3>
+                <ul class="space-y-2 text-sm text-cream">
+                  <li class="flex items-center gap-3"><span class="h-1.5 w-4 bg-gold-500" aria-hidden="true"></span>Player scouting</li>
+                  <li class="flex items-center gap-3"><span class="h-1.5 w-4 bg-gold-500" aria-hidden="true"></span>Coaching clinics</li>
+                  <li class="flex items-center gap-3"><span class="h-1.5 w-4 bg-gold-500" aria-hidden="true"></span>Referee development</li>
+                  <li class="flex items-center gap-3"><span class="h-1.5 w-4 bg-gold-500" aria-hidden="true"></span>Football administration training</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 06 PLAYER PATHWAY ═══ -->
+      <section id="pathway" aria-labelledby="pathway-h" class="croc-scales bg-purple-900">
+        <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
+          <div class="reveal mb-12 flex items-end gap-5">
+            <span class="section-num" aria-hidden="true">05</span>
+            <h2 id="pathway-h" class="font-display text-2xl text-cream sm:text-4xl">
+              The Player <span class="text-gold-500">Pathway</span>
+            </h2>
+          </div>
+
+          <ol class="grid gap-6 lg:grid-cols-3">
+            <li class="reveal rounded-lg border border-gold-500/20 bg-purple-950 p-7">
+              <span class="font-display text-3xl text-gold-500" aria-hidden="true">1</span>
+              <h3 class="font-display mb-3 mt-3 text-base text-cream">Local Associations</h3>
+              <p class="text-sm text-lav">
+                Grassroots participation — every young player starts in structured local football
+                with proper coaching and regular game time.
+              </p>
+            </li>
+            <li class="reveal rounded-lg border border-gold-500/20 bg-purple-950 p-7">
+              <span class="font-display text-3xl text-gold-500" aria-hidden="true">2</span>
+              <h3 class="font-display mb-3 mt-3 text-base text-cream">Regional Competitions</h3>
+              <p class="text-sm text-lav">
+                Inter-club leagues and tournaments where our teams compete and players are seen by
+                scouts.
+              </p>
+            </li>
+            <li class="reveal rounded-lg border border-gold-500/20 bg-purple-950 p-7">
+              <span class="font-display text-3xl text-gold-500" aria-hidden="true">3</span>
+              <h3 class="font-display mb-3 mt-3 text-base text-cream">Provincial Structures</h3>
+              <p class="text-sm text-lav">
+                Coordinated development within provincial football structures for players who rise
+                through the ranks.
+              </p>
+            </li>
+          </ol>
+
+          <p class="reveal mt-10 max-w-3xl text-lg text-cream">
+            Our structures create clear pathways from grassroots participation to elite
+            development.
+          </p>
+        </div>
+      </section>
+
+      <!-- ═══ 07 SPONSORSHIP ═══ -->
+      <section id="sponsorship" aria-labelledby="sponsorship-h" class="border-y-2 border-gold-500/40 bg-purple-950">
+        <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
+          <div class="reveal mb-8 flex items-end gap-5">
+            <span class="section-num" aria-hidden="true">06</span>
+            <h2 id="sponsorship-h" class="font-display text-2xl text-cream sm:text-4xl">
+              Sponsor <span class="text-gold-500">Bethanie United FC</span>
+            </h2>
+          </div>
+
+          <p class="reveal mb-12 max-w-3xl text-lg text-lav">
+            Align your brand with a purpose-driven club at the heart of its community. Sponsorship
+            of Bethanie United FC delivers real visibility in Bethanie, Brits and the wider
+            Madibeng area — and funds work that changes young lives.
+          </p>
+
+          <h3 class="reveal font-display mb-6 text-lg text-cream">Brand Visibility</h3>
+          <div class="grid gap-6 lg:grid-cols-3">
+            <div class="reveal rounded-lg border border-gold-500/20 bg-purple-900 p-7">
+              <h4 class="mb-3 font-bold text-gold-500">Team Jerseys</h4>
+              <p class="text-sm text-lav">
+                Prime logo placement on match and training kit worn by six teams, every week, all
+                season.
+              </p>
+            </div>
+            <div class="reveal rounded-lg border border-gold-500/20 bg-purple-900 p-7">
+              <h4 class="mb-3 font-bold text-gold-500">Match-Day Branding</h4>
+              <p class="text-sm text-lav">
+                Banners, pitch-side signage and public announcements at home fixtures and club
+                events.
+              </p>
+            </div>
+            <div class="reveal rounded-lg border border-gold-500/20 bg-purple-900 p-7">
+              <h4 class="mb-3 font-bold text-gold-500">Digital Campaigns</h4>
+              <p class="text-sm text-lav">
+                Your brand on our social media campaigns and website advertising, reaching families
+                across the North West.
+              </p>
+            </div>
+          </div>
+
+          <div class="reveal mt-10 rounded-lg border border-gold-500/40 bg-purple-900 p-8">
+            <h3 class="font-display mb-4 text-lg text-gold-500">
+              CSI &amp; B-BBEE-Friendly Community Investment
+            </h3>
+            <p class="mb-5 text-lav">
+              Because Bethanie United FC is a registered Non-Profit Company, sponsorship is a
+              direct corporate social investment. Your contribution funds:
+            </p>
+            <ul class="grid gap-3 text-sm text-cream sm:grid-cols-2 lg:grid-cols-3">
+              <li class="flex items-center gap-3"><span class="h-1.5 w-4 bg-gold-500" aria-hidden="true"></span>Youth Development</li>
+              <li class="flex items-center gap-3"><span class="h-1.5 w-4 bg-gold-500" aria-hidden="true"></span>Community Empowerment</li>
+              <li class="flex items-center gap-3"><span class="h-1.5 w-4 bg-gold-500" aria-hidden="true"></span>Crime Prevention</li>
+              <li class="flex items-center gap-3"><span class="h-1.5 w-4 bg-gold-500" aria-hidden="true"></span>Education Support</li>
+              <li class="flex items-center gap-3"><span class="h-1.5 w-4 bg-gold-500" aria-hidden="true"></span>Grassroots Sports</li>
+            </ul>
+            <a
+              href="mailto:sponsorships@bethanieunitedfc.co.za?subject=Sponsorship%20Enquiry%20%E2%80%94%20Bethanie%20United%20FC"
+              class="mt-8 inline-block rounded bg-gold-500 px-7 py-3.5 font-bold text-purple-950 transition hover:bg-gold-400"
+            >
+              Enquire About Sponsorship
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 08 ROADMAP ═══ -->
+      <section id="roadmap" aria-labelledby="roadmap-h" class="croc-scales bg-purple-900">
+        <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
+          <div class="reveal mb-12 flex items-end gap-5">
+            <span class="section-num" aria-hidden="true">07</span>
+            <h2 id="roadmap-h" class="font-display text-2xl text-cream sm:text-4xl">
+              Our Vision to <span class="text-gold-500">2046</span>
+            </h2>
+          </div>
+
+          <div class="space-y-6">
+            <div class="reveal grid gap-4 rounded-lg border border-gold-500/20 bg-purple-950 p-7 md:grid-cols-4">
+              <div>
+                <span class="font-display text-gold-500">Phase 1</span>
+                <p class="font-display mt-1 text-xl text-cream">2026–2030</p>
+              </div>
+              <p class="text-sm text-lav md:col-span-3">
+                Establish club structures, secure SAFA affiliation, register youth teams in
+                official competitions, build sponsorship partnerships and grow community
+                participation.
+              </p>
+            </div>
+            <div class="reveal grid gap-4 rounded-lg border border-gold-500/20 bg-purple-950 p-7 md:grid-cols-4">
+              <div>
+                <span class="font-display text-gold-500">Phase 2</span>
+                <p class="font-display mt-1 text-xl text-cream">2031–2035</p>
+              </div>
+              <p class="text-sm text-lav md:col-span-3">
+                Develop our own training facility, launch a women's football programme, compete in
+                regional league football and expand coaching capacity.
+              </p>
+            </div>
+            <div class="reveal grid gap-4 rounded-lg border border-gold-500/20 bg-purple-950 p-7 md:grid-cols-4">
+              <div>
+                <span class="font-display text-gold-500">Phase 3</span>
+                <p class="font-display mt-1 text-xl text-cream">2036–2046</p>
+              </div>
+              <p class="text-sm text-lav md:col-span-3">
+                Establish a full football academy with full-time coaching staff, compete at
+                provincial and national level, produce professional players and become a recognised
+                development centre.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 09 LEADERSHIP ═══ -->
+      <section id="leadership" aria-labelledby="leadership-h" class="bg-purple-950">
+        <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
+          <div class="reveal mb-12 flex items-end gap-5">
+            <span class="section-num" aria-hidden="true">08</span>
+            <h2 id="leadership-h" class="font-display text-2xl text-cream sm:text-4xl">
+              Board of <span class="text-gold-500">Directors</span>
+            </h2>
+          </div>
+
+          <div class="grid gap-6 lg:grid-cols-3">
+            {directors.map((name) => (
+              <div class="reveal rounded-lg border border-gold-500/20 bg-purple-900 p-7 text-center">
+                <span class="font-display mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-gold-500 text-xl text-gold-500" aria-hidden="true">
+                  {name.split(' ').at(-1)!.charAt(0)}
+                </span>
+                <h3 class="font-bold text-cream">{name}</h3>
+                <p class="mt-1 text-sm text-gold-400">Director</p>
+              </div>
+            ))}
+          </div>
+
+          <p class="reveal mt-10 max-w-3xl text-lg text-lav">
+            Together, our board brings decades of collective experience in community leadership,
+            administration and grassroots football to the club.
+          </p>
+        </div>
+      </section>
+
+      <!-- ═══ 10 FAQ ═══ -->
+      <section id="faq" aria-labelledby="faq-h" class="croc-scales bg-purple-900">
+        <div class="mx-auto max-w-4xl px-4 py-20 sm:px-6 sm:py-24">
+          <div class="reveal mb-12 flex items-end gap-5">
+            <span class="section-num" aria-hidden="true">09</span>
+            <h2 id="faq-h" class="font-display text-2xl text-cream sm:text-4xl">
+              Frequently Asked <span class="text-gold-500">Questions</span>
+            </h2>
+          </div>
+
+          <div class="space-y-8">
+            {faqs.map(({ q, a }) => (
+              <div class="reveal border-b border-gold-500/20 pb-8">
+                <h3 class="font-display mb-3 text-base text-gold-500">{q}</h3>
+                <p class="text-lav">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 11 CONTACT ═══ -->
+      <section id="contact" aria-labelledby="contact-h" class="bg-purple-950">
+        <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
+          <div class="reveal mb-12 flex items-end gap-5">
+            <span class="section-num" aria-hidden="true">10</span>
+            <h2 id="contact-h" class="font-display text-2xl text-cream sm:text-4xl">
+              Contact <span class="text-gold-500">the Club</span>
+            </h2>
+          </div>
+
+          <div class="grid gap-12 lg:grid-cols-2">
+            <div class="reveal space-y-8">
+              <div>
+                <h3 class="font-display mb-3 text-base text-gold-500">Phone</h3>
+                <a href={`tel:${PHONE}`} class="text-xl font-bold text-cream hover:text-gold-400">
+                  {PHONE_DISPLAY}
+                </a>
+              </div>
+
+              <div>
+                <h3 class="font-display mb-3 text-base text-gold-500">Email</h3>
+                <ul class="space-y-2 text-lav">
+                  <li>
+                    General enquiries —
+                    <a href="mailto:info@bethanieunitedfc.co.za" class="font-semibold text-cream hover:text-gold-400">info@bethanieunitedfc.co.za</a>
+                  </li>
+                  <li>
+                    Sponsorships —
+                    <a href="mailto:sponsorships@bethanieunitedfc.co.za" class="font-semibold text-cream hover:text-gold-400">sponsorships@bethanieunitedfc.co.za</a>
+                  </li>
+                  <li>
+                    Administration —
+                    <a href="mailto:admin@bethanieunitedfc.co.za" class="font-semibold text-cream hover:text-gold-400">admin@bethanieunitedfc.co.za</a>
+                  </li>
+                  <li>
+                    Secretary —
+                    <a href="mailto:secretary@bethanieunitedfc.co.za" class="font-semibold text-cream hover:text-gold-400">secretary@bethanieunitedfc.co.za</a>
+                  </li>
+                  <li>
+                    Chairman —
+                    <a href="mailto:chairman@bethanieunitedfc.co.za" class="font-semibold text-cream hover:text-gold-400">chairman@bethanieunitedfc.co.za</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 class="font-display mb-3 text-base text-gold-500">Registered Office</h3>
+                <address class="not-italic text-lav">
+                  {ADDRESS}<br />
+                  South Africa
+                </address>
+                <p class="mt-3 text-sm text-lav">
+                  {LEGAL_NAME} · Registration no. {REG_NO}
+                </p>
+              </div>
+            </div>
+
+            <!-- Static enquiry form: replace the Formspree placeholder ID before go-live,
+                 or keep the mailto fallback below. No backend required. -->
+            <form
+              class="reveal rounded-lg border border-gold-500/20 bg-purple-900 p-8"
+              action="https://formspree.io/f/REPLACE_WITH_FORM_ID"
+              method="POST"
+            >
+              <h3 class="font-display mb-6 text-base text-gold-500">Send an Enquiry</h3>
+
+              <label for="f-name" class="mb-1 block text-sm font-semibold text-cream">Your name</label>
+              <input
+                id="f-name"
+                name="name"
+                type="text"
+                required
+                autocomplete="name"
+                class="mb-5 w-full rounded border border-gold-500/30 bg-purple-950 px-4 py-3 text-cream placeholder:text-lav/60"
+                placeholder="Full name"
+              />
+
+              <label for="f-email" class="mb-1 block text-sm font-semibold text-cream">Email address</label>
+              <input
+                id="f-email"
+                name="email"
+                type="email"
+                required
+                autocomplete="email"
+                class="mb-5 w-full rounded border border-gold-500/30 bg-purple-950 px-4 py-3 text-cream placeholder:text-lav/60"
+                placeholder="you@example.com"
+              />
+
+              <label for="f-interest" class="mb-1 block text-sm font-semibold text-cream">I'm interested in</label>
+              <select
+                id="f-interest"
+                name="interest"
+                class="mb-5 w-full rounded border border-gold-500/30 bg-purple-950 px-4 py-3 text-cream"
+              >
+                <option>Playing</option>
+                <option>Sponsoring</option>
+                <option>Other</option>
+              </select>
+
+              <label for="f-message" class="mb-1 block text-sm font-semibold text-cream">Message</label>
+              <textarea
+                id="f-message"
+                name="message"
+                rows="4"
+                required
+                class="mb-6 w-full rounded border border-gold-500/30 bg-purple-950 px-4 py-3 text-cream placeholder:text-lav/60"
+                placeholder="Tell us how we can help"></textarea>
+
+              <button
+                type="submit"
+                class="w-full rounded bg-gold-500 px-7 py-3.5 font-bold text-purple-950 transition hover:bg-gold-400"
+              >
+                Send Enquiry
+              </button>
+              <p class="mt-4 text-center text-sm text-lav">
+                Or email us directly at
+                <a href="mailto:info@bethanieunitedfc.co.za" class="font-semibold text-cream hover:text-gold-400">info@bethanieunitedfc.co.za</a>
+              </p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="border-t border-gold-500/20 bg-purple-950">
+      <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+        <div class="grid gap-10 md:grid-cols-3">
+          <div>
+            <div class="flex items-center gap-3">
+              <img src="/img/crest.webp" alt="" width="40" height="40" loading="lazy" decoding="async" class="h-10 w-10" />
+              <span class="font-display text-sm text-cream">BETHANIE UNITED <span class="text-gold-500">FC</span></span>
+            </div>
+            <p class="mt-4 text-sm font-semibold text-gold-400">Passion • Unity • Excellence</p>
+            <p class="mt-2 text-sm text-lav">
+              Serving Bethanie, Brits, Madibeng and the North West Province.
+            </p>
+          </div>
+
+          <nav aria-label="Footer navigation">
+            <h2 class="font-display mb-4 text-sm text-gold-500">Explore</h2>
+            <ul class="space-y-2 text-sm">
+              {[...navLinks, { href: '#roadmap', label: 'Roadmap' }, { href: '#faq', label: 'FAQ' }].map(({ href, label }) => (
+                <li><a href={href} class="text-lav hover:text-gold-400">{label}</a></li>
+              ))}
+            </ul>
+          </nav>
+
+          <div>
+            <h2 class="font-display mb-4 text-sm text-gold-500">Follow the Crocodiles</h2>
+            <div class="flex gap-4">
+              <a href="https://www.facebook.com/" aria-label="Bethanie United FC on Facebook" rel="noopener noreferrer" class="flex h-10 w-10 items-center justify-center rounded-full border border-gold-500/40 text-gold-400 hover:bg-gold-500 hover:text-purple-950">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.7c0-.9.3-1.6 1.6-1.6h1.7V4.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V14h2.7v8h3.4z"/></svg>
+              </a>
+              <a href="https://www.instagram.com/" aria-label="Bethanie United FC on Instagram" rel="noopener noreferrer" class="flex h-10 w-10 items-center justify-center rounded-full border border-gold-500/40 text-gold-400 hover:bg-gold-500 hover:text-purple-950">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </a>
+              <a href="https://x.com/" aria-label="Bethanie United FC on X (Twitter)" rel="noopener noreferrer" class="flex h-10 w-10 items-center justify-center rounded-full border border-gold-500/40 text-gold-400 hover:bg-gold-500 hover:text-purple-950">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1.6 2H8l4.4 5.9L18.9 2zm-1.1 18h1.7L7.1 3.7H5.3L17.8 20z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-12 flex flex-col gap-3 border-t border-gold-500/10 pt-6 text-sm text-lav sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 {LEGAL_NAME} · Reg no. {REG_NO}</p>
+          <p>
+            Website by
+            <a href="https://webafy.co.za" rel="noopener noreferrer" class="font-semibold text-gold-400 hover:text-gold-300">Webafy — webafy.co.za</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Tiny vanilla script: mobile nav + scroll reveals (reduced-motion aware) -->
+    <script is:inline>
+      (() => {
+        const t = document.getElementById('nav-toggle');
+        const m = document.getElementById('nav-menu');
+        if (t && m) {
+          t.addEventListener('click', () => {
+            const open = m.classList.toggle('open');
+            t.setAttribute('aria-expanded', String(open));
+          });
+          m.querySelectorAll('a').forEach((a) =>
+            a.addEventListener('click', () => {
+              m.classList.remove('open');
+              t.setAttribute('aria-expanded', 'false');
+            })
+          );
+        }
+        const els = document.querySelectorAll('.reveal');
+        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!reduce && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  e.target.classList.add('in');
+                  io.unobserve(e.target);
+                }
+              });
+            },
+            { threshold: 0.12 }
+          );
+          els.forEach((el) => io.observe(el));
+        } else {
+          els.forEach((el) => el.classList.add('in'));
+        }
+      })();
+    </script>
+  </body>
+</html>
