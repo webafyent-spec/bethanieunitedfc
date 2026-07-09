@@ -6,6 +6,7 @@ const URL = `${DOMAIN}/`;
 const NAME = 'Bethanie United Football Club';
 const LEGAL_NAME = 'Bethanie United Football Club NPC';
 const REG_NO = '2026/444177/08';
+const PBO_NO = '930090969';
 const PHONE = '+27120018488';
 const PHONE_DISPLAY = '012 001 8488';
 const ADDRESS = '10230 Otlotleng Section, Bethanie, Brits, North West, 0270';
@@ -88,7 +89,7 @@ const faqs = [
   },
   {
     q: 'Is Bethanie United FC a registered non-profit?',
-    a: 'Yes. Bethanie United Football Club NPC is a registered Non-Profit Company, incorporated with the CIPC on 4 June 2026 under registration number 2026/444177/08.',
+    a: `Yes. Bethanie United Football Club NPC is a registered Non-Profit Company, incorporated with the CIPC on 4 June 2026 under registration number ${REG_NO}. The club is also a registered Public Benefit Organisation (PBO no. ${PBO_NO}), recognised by SARS.`,
   },
   {
     q: 'What age groups can join Bethanie United FC?',
@@ -111,11 +112,18 @@ const jsonLd = {
       alternateName: ['Bethanie United FC', 'The Crocodiles of Bethanie', 'BUFC'],
       sport: 'Soccer',
       foundingDate: '2026-06-04',
-      identifier: {
-        '@type': 'PropertyValue',
-        propertyID: 'CIPC Registration',
-        value: REG_NO,
-      },
+      identifier: [
+        {
+          '@type': 'PropertyValue',
+          propertyID: 'CIPC Registration',
+          value: REG_NO,
+        },
+        {
+          '@type': 'PropertyValue',
+          propertyID: 'SARS PBO Number',
+          value: PBO_NO,
+        },
+      ],
       slogan: 'Passion • Unity • Excellence',
       description:
         'Community youth football club in Bethanie village near Brits, North West Province, South Africa. A registered Non-Profit Company developing players from Under 11 to senior level through football, community and talent development programmes.',
@@ -409,7 +417,7 @@ const navLinks = [
                 village near Brits, in the Madibeng area of the North West Province. Founded by
                 community leaders who believe sport can change lives, the club was registered with
                 the CIPC as a Non-Profit Company on 4 June 2026, under registration number
-                {REG_NO}.
+                {REG_NO}, and is a registered Public Benefit Organisation (PBO no. {PBO_NO}).
               </p>
               <p>
                 We exist for four reasons: <strong class="text-cream">youth development</strong>,
@@ -458,6 +466,10 @@ const navLinks = [
                   <div>
                     <dt class="font-bold uppercase tracking-wider text-gold-400">Founded</dt>
                     <dd class="mt-1 text-cream">4 June 2026 (CIPC NPC, reg no. {REG_NO})</dd>
+                  </div>
+                  <div>
+                    <dt class="font-bold uppercase tracking-wider text-gold-400">PBO Status</dt>
+                    <dd class="mt-1 text-cream">Registered Public Benefit Organisation · PBO no. {PBO_NO}</dd>
                   </div>
                 </dl>
               </div>
@@ -668,8 +680,9 @@ const navLinks = [
               CSI &amp; B-BBEE-Friendly Community Investment
             </h3>
             <p class="mb-5 text-lav">
-              Because Bethanie United FC is a registered Non-Profit Company, sponsorship is a
-              direct corporate social investment. Your contribution funds:
+              Because Bethanie United FC is a registered Non-Profit Company and a Public Benefit
+              Organisation (PBO no. {PBO_NO}), sponsorship qualifies as a tax-deductible Section
+              18A donation and a direct corporate social investment. Your contribution funds:
             </p>
             <ul class="grid gap-3 text-sm text-cream sm:grid-cols-2 lg:grid-cols-3">
               <li class="flex items-center gap-3"><span class="h-1.5 w-4 bg-gold-500" aria-hidden="true"></span>Youth Development</li>
@@ -837,7 +850,7 @@ const navLinks = [
                   South Africa
                 </address>
                 <p class="mt-3 text-sm text-lav">
-                  {LEGAL_NAME} · Registration no. {REG_NO}
+                  {LEGAL_NAME} · Reg no. {REG_NO} · PBO no. {PBO_NO}
                 </p>
               </div>
             </div>
@@ -950,7 +963,7 @@ const navLinks = [
         </div>
 
         <div class="mt-12 flex flex-col gap-3 border-t border-gold-500/10 pt-6 text-sm text-lav sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 {LEGAL_NAME} · Reg no. {REG_NO}</p>
+          <p>© 2026 {LEGAL_NAME} · Reg no. {REG_NO} · PBO no. {PBO_NO}</p>
           <p>
             Website by
             <a href="https://webafy.co.za" rel="noopener noreferrer" class="font-semibold text-gold-400 hover:text-gold-300">Webafy — webafy.co.za</a>
