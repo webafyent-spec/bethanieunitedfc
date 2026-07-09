@@ -208,6 +208,14 @@ const jsonLd = {
   ],
 };
 
+/* Decorative gold-dust particles for the hero (deterministic, no runtime cost) */
+const particles = Array.from({ length: 14 }, (_, i) => ({
+  left: (i * 7.3 + 3) % 100,
+  size: 3 + (i % 4) * 2,
+  duration: 9 + (i % 5) * 3,
+  delay: (i * 1.7) % 9,
+}));
+
 const navLinks = [
   { href: '#about', label: 'About' },
   { href: '#programmes', label: 'Programmes' },
@@ -309,29 +317,17 @@ const navLinks = [
 
   <body class="bg-purple-950 font-body text-cream">
     <a href="#main" class="skip-link">Skip to main content</a>
+    <div id="scroll-progress" aria-hidden="true"></div>
 
     <!-- ═══ NAV ═══ -->
-    <header class="fixed inset-x-0 top-0 z-50 border-b border-gold-500/20 bg-purple-950/90 backdrop-blur">
+    <header id="site-header" class="fixed inset-x-0 top-0 z-50 border-b border-gold-500/20 bg-purple-950/90 backdrop-blur">
       <nav aria-label="Main navigation" class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <a href="#top" class="flex items-center gap-3">
-          <img src="/img/bethamie_logo.png" alt="Bethanie United FC crest" width="44" height="44" loading="eager" decoding="async" class="h-11 w-11" />
+          <img src="/img/bethamie_logo.png" alt="Bethanie United FC crest" width="44" height="44" loading="eager" decoding="async" class="logo-img h-11 w-11" />
           <span class="font-display text-sm leading-tight tracking-wide text-cream sm:text-base">
             BETHANIE UNITED <span class="text-gold-500">FC</span>
           </span>
         </a>
-
-        <button
-          id="nav-toggle"
-          type="button"
-          class="rounded border border-gold-500/40 p-2 text-gold-400 md:hidden"
-          aria-expanded="false"
-          aria-controls="nav-menu"
-          aria-label="Toggle navigation menu"
-        >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
 
         <div
           id="nav-menu"
@@ -348,6 +344,37 @@ const navLinks = [
           >
             Become a Sponsor
           </a>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button
+            id="sfx-toggle"
+            type="button"
+            class="rounded-full border border-gold-500/40 p-2 text-gold-400 transition hover:border-gold-400 hover:text-gold-300"
+            aria-pressed="false"
+            aria-label="Toggle sound effects"
+            title="Sound effects"
+          >
+            <svg class="sfx-off" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M11 5 6 9H2v6h4l5 4V5z" /><line x1="23" y1="9" x2="17" y2="15" /><line x1="17" y1="9" x2="23" y2="15" />
+            </svg>
+            <svg class="sfx-on hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M11 5 6 9H2v6h4l5 4V5z" /><path d="M15.5 8.5a5 5 0 0 1 0 7" /><path d="M18.5 5.5a9 9 0 0 1 0 13" />
+            </svg>
+          </button>
+
+          <button
+            id="nav-toggle"
+            type="button"
+            class="rounded border border-gold-500/40 p-2 text-gold-400 md:hidden"
+            aria-expanded="false"
+            aria-controls="nav-menu"
+            aria-label="Toggle navigation menu"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
         </div>
       </nav>
     </header>
@@ -366,18 +393,27 @@ const navLinks = [
             fetchpriority="high"
             loading="eager"
             decoding="async"
-            class="absolute inset-0 h-full w-full object-cover"
+            class="kenburns absolute inset-0 h-full w-full object-cover"
           />
         </picture>
         <div class="absolute inset-0 bg-gradient-to-t from-purple-950 via-purple-950/70 to-purple-900/40" aria-hidden="true"></div>
 
-        <div class="relative mx-auto w-full max-w-6xl px-4 py-24 sm:px-6">
+        <div class="particles" aria-hidden="true">
+          {particles.map(({ left, size, duration, delay }) => (
+            <span
+              class="particle"
+              style={`left:${left}%;width:${size}px;height:${size}px;animation-duration:${duration}s;animation-delay:${delay}s;`}
+            ></span>
+          ))}
+        </div>
+
+        <div class="hero-stagger relative mx-auto w-full max-w-6xl px-4 py-24 sm:px-6">
           <p class="mb-4 text-sm font-bold uppercase tracking-[0.25em] text-gold-400">
             The Crocodiles of Bethanie · Est. 2026
           </p>
           <h1 class="font-display max-w-4xl text-4xl leading-tight text-cream sm:text-5xl lg:text-6xl">
             Bethanie United Football Club —
-            <span class="text-gold-500">Youth Football Development</span>
+            <span class="shimmer-text">Youth Football Development</span>
             in North West Province
           </h1>
           <p class="mt-6 max-w-2xl text-lg text-lav sm:text-xl">
@@ -398,7 +434,20 @@ const navLinks = [
             </a>
           </div>
         </div>
+
+        <div class="scroll-cue" aria-hidden="true"><span></span></div>
       </section>
+
+      <!-- ═══ MARQUEE TICKER ═══ -->
+      <div class="marquee border-y border-gold-500/25 bg-purple-900 py-3.5" aria-hidden="true">
+        <div class="marquee-track font-display text-sm tracking-[0.3em] text-gold-500/90">
+          {[0, 1].map(() => (
+            <span class="pr-8">
+              PASSION&ensp;•&ensp;UNITY&ensp;•&ensp;EXCELLENCE&ensp;•&ensp;THE CROCODILES OF BETHANIE&ensp;•&ensp;EST. 2026&ensp;•&ensp;U11 TO SENIOR&ensp;•&ensp;
+            </span>
+          ))}
+        </div>
+      </div>
 
       <!-- ═══ 02 ABOUT ═══ -->
       <section id="about" aria-labelledby="about-h" class="croc-scales border-t border-gold-500/10 bg-purple-900">
@@ -411,7 +460,7 @@ const navLinks = [
           </div>
 
           <div class="grid gap-10 lg:grid-cols-5">
-            <div class="reveal space-y-5 text-lav lg:col-span-3">
+            <div class="reveal space-y-5 text-lav lg:col-span-3" data-reveal="left">
               <p>
                 Bethanie United Football Club is a community football club rooted in Bethanie
                 village near Brits, in the Madibeng area of the North West Province. Founded by
@@ -439,7 +488,7 @@ const navLinks = [
             </div>
 
             <!-- Club identity fact card -->
-            <aside class="reveal lg:col-span-2" aria-label="Club identity facts">
+            <aside class="reveal lg:col-span-2" data-reveal="right" aria-label="Club identity facts">
               <div class="rounded-lg border border-gold-500/30 bg-purple-950 p-7">
                 <h3 class="font-display mb-6 text-lg text-gold-500">Club Identity</h3>
                 <dl class="space-y-4 text-sm">
@@ -760,7 +809,7 @@ const navLinks = [
 
           <div class="grid gap-6 lg:grid-cols-3">
             {directors.map((name) => (
-              <div class="reveal rounded-lg border border-gold-500/20 bg-purple-900 p-7 text-center">
+              <div class="reveal rounded-lg border border-gold-500/20 bg-purple-900 p-7 text-center" data-reveal="zoom">
                 <span class="font-display mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-gold-500 text-xl text-gold-500" aria-hidden="true">
                   {name.split(' ').at(-1)!.charAt(0)}
                 </span>
@@ -787,12 +836,17 @@ const navLinks = [
             </h2>
           </div>
 
-          <div class="space-y-8">
+          <div class="space-y-4">
             {faqs.map(({ q, a }) => (
-              <div class="reveal border-b border-gold-500/20 pb-8">
-                <h3 class="font-display mb-3 text-base text-gold-500">{q}</h3>
-                <p class="text-lav">{a}</p>
-              </div>
+              <details class="faq-item reveal border-b border-gold-500/20 pb-4">
+                <summary class="py-2">
+                  <h3 class="font-display text-base text-gold-500">{q}</h3>
+                  <svg class="faq-chevron text-gold-400" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <p class="faq-body pt-2 text-lav">{a}</p>
+              </details>
             ))}
           </div>
         </div>
@@ -972,9 +1026,24 @@ const navLinks = [
       </div>
     </footer>
 
-    <!-- Tiny vanilla script: mobile nav + scroll reveals (reduced-motion aware) -->
+    <!-- Back to top -->
+    <button
+      id="back-top"
+      type="button"
+      aria-label="Back to top"
+      class="flex h-11 w-11 items-center justify-center rounded-full bg-gold-500 text-purple-950 shadow-lg hover:bg-gold-400"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 19V5" /><path d="m5 12 7-7 7 7" />
+      </svg>
+    </button>
+
+    <!-- Vanilla script: nav, staggered reveals, scroll UI, synthesized SFX (no audio files) -->
     <script is:inline>
       (() => {
+        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        /* Mobile nav */
         const t = document.getElementById('nav-toggle');
         const m = document.getElementById('nav-menu');
         if (t && m) {
@@ -989,23 +1058,107 @@ const navLinks = [
             })
           );
         }
+
+        /* Scroll reveals with stagger */
         const els = document.querySelectorAll('.reveal');
-        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (!reduce && 'IntersectionObserver' in window) {
           const io = new IntersectionObserver(
             (entries) => {
-              entries.forEach((e) => {
-                if (e.isIntersecting) {
+              entries
+                .filter((e) => e.isIntersecting)
+                .forEach((e, i) => {
+                  e.target.style.transitionDelay = i * 90 + 'ms';
                   e.target.classList.add('in');
                   io.unobserve(e.target);
-                }
-              });
+                  setTimeout(() => (e.target.style.transitionDelay = ''), 1000 + i * 90);
+                });
             },
             { threshold: 0.12 }
           );
           els.forEach((el) => io.observe(el));
         } else {
           els.forEach((el) => el.classList.add('in'));
+        }
+
+        /* Scroll-linked UI: progress bar, header shadow, back-to-top */
+        const bar = document.getElementById('scroll-progress');
+        const header = document.getElementById('site-header');
+        const backTop = document.getElementById('back-top');
+        let ticking = false;
+        const onScroll = () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => {
+            const y = scrollY;
+            const max = document.documentElement.scrollHeight - innerHeight;
+            if (bar) bar.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')';
+            if (header) header.classList.toggle('scrolled', y > 24);
+            if (backTop) backTop.classList.toggle('show', y > 600);
+            ticking = false;
+          });
+        };
+        addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+        backTop?.addEventListener('click', () =>
+          scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
+        );
+
+        /* SFX — synthesized with WebAudio, opt-in via the speaker toggle */
+        const sfxBtn = document.getElementById('sfx-toggle');
+        let ctx = null;
+        let sfxOn = false;
+        const tone = (freq, dur, type, vol, delay) => {
+          if (!ctx) return;
+          const o = ctx.createOscillator();
+          const g = ctx.createGain();
+          const t0 = ctx.currentTime + (delay || 0);
+          o.type = type || 'triangle';
+          o.frequency.value = freq;
+          g.gain.setValueAtTime(vol || 0.04, t0);
+          g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+          o.connect(g).connect(ctx.destination);
+          o.start(t0);
+          o.stop(t0 + dur + 0.02);
+        };
+        const clickSfx = () => tone(700, 0.05);
+        const whistle = () => {
+          tone(2200, 0.12, 'square', 0.03);
+          tone(2600, 0.18, 'square', 0.03, 0.15);
+        };
+        const setIcon = () => {
+          sfxBtn.querySelector('.sfx-on').classList.toggle('hidden', !sfxOn);
+          sfxBtn.querySelector('.sfx-off').classList.toggle('hidden', sfxOn);
+          sfxBtn.setAttribute('aria-pressed', String(sfxOn));
+        };
+        if (sfxBtn) {
+          sfxBtn.addEventListener('click', () => {
+            sfxOn = !sfxOn;
+            if (sfxOn && !ctx && 'AudioContext' in window) ctx = new AudioContext();
+            try {
+              localStorage.setItem('bufc-sfx', sfxOn ? '1' : '0');
+            } catch {}
+            setIcon();
+            if (sfxOn) whistle();
+          });
+          try {
+            if (localStorage.getItem('bufc-sfx') === '1') {
+              sfxOn = true;
+              setIcon();
+              /* AudioContext needs a user gesture — create it lazily on first click */
+              addEventListener(
+                'pointerdown',
+                () => {
+                  if (sfxOn && !ctx && 'AudioContext' in window) ctx = new AudioContext();
+                },
+                { once: true }
+              );
+            }
+          } catch {}
+          document.addEventListener('click', (e) => {
+            if (!sfxOn || !ctx) return;
+            const el = e.target.closest('a, button, summary');
+            if (el && el.id !== 'sfx-toggle') clickSfx();
+          });
         }
       })();
     </script>

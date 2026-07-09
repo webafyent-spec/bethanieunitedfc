@@ -23,17 +23,35 @@ html {
   scroll-padding-top: 5rem;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
-
 body {
   font-family: var(--font-body);
   background-color: var(--color-purple-950);
   color: var(--color-cream);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Text selection in club colours */
+::selection {
+  background: var(--color-gold-500);
+  color: var(--color-purple-950);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-purple-950);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--color-gold-600), var(--color-gold-400));
+  border-radius: 8px;
+  border: 3px solid var(--color-purple-950);
+}
+@supports (scrollbar-color: red blue) {
+  html {
+    scrollbar-color: var(--color-gold-600) var(--color-purple-950);
+  }
 }
 
 /* Skip link */
@@ -58,6 +76,59 @@ body {
   outline-offset: 3px;
 }
 
+/* ═══ Scroll progress bar (JS drives scaleX) ═══ */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--color-gold-600), var(--color-gold-300));
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* ═══ Header scroll state ═══ */
+#site-header {
+  transition: box-shadow 0.35s ease, background-color 0.35s ease;
+}
+header#site-header.scrolled {
+  background-color: rgb(20 9 46 / 0.97);
+  box-shadow: 0 10px 30px -10px rgb(0 0 0 / 0.6), 0 1px 0 rgb(212 167 59 / 0.25);
+}
+
+/* Logo hover */
+.logo-img {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+a:hover > .logo-img,
+a:focus-visible > .logo-img {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* Nav link underline grow */
+#nav-menu > a {
+  position: relative;
+}
+#nav-menu > a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--color-gold-500), var(--color-gold-300));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+#nav-menu > a:hover::after,
+#nav-menu > a:focus-visible::after {
+  transform: scaleX(1);
+}
+
 /* Crocodile-scale texture — pure CSS pattern accent */
 .croc-scales {
   background-image:
@@ -67,7 +138,7 @@ body {
   background-size: 48px 30px;
 }
 
-/* Gold section numerals */
+/* Gold section numerals — fill in softly once revealed */
 .section-num {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 6vw, 4rem);
@@ -76,35 +147,322 @@ body {
   -webkit-text-stroke: 2px var(--color-gold-500);
   opacity: 0.85;
   user-select: none;
+  transition: color 1.2s ease 0.35s;
+}
+.reveal.in .section-num {
+  color: rgb(212 167 59 / 0.18);
 }
 
-/* Scroll-reveal (JS adds .in; reduced-motion users see content immediately) */
+/* ═══ Scroll-reveal system (JS adds .in + stagger delay) ═══ */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(30px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal[data-reveal="left"] {
+  transform: translateX(-36px);
+}
+.reveal[data-reveal="right"] {
+  transform: translateX(36px);
+}
+.reveal[data-reveal="zoom"] {
+  transform: scale(0.92);
 }
 .reveal.in {
   opacity: 1;
   transform: none;
 }
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
+
+/* ═══ Hero ═══ */
+.kenburns {
+  animation: kenburns 20s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.09) translateY(-1.5%);
   }
 }
 
-/* Mobile nav */
+/* Staggered hero entrance (CSS-only, runs at load) */
+.hero-stagger > * {
+  opacity: 0;
+  animation: hero-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-stagger > *:nth-child(1) { animation-delay: 0.15s; }
+.hero-stagger > *:nth-child(2) { animation-delay: 0.3s; }
+.hero-stagger > *:nth-child(3) { animation-delay: 0.5s; }
+.hero-stagger > *:nth-child(4) { animation-delay: 0.7s; }
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Gold shimmer sweeping across key text */
+.shimmer-text {
+  background: linear-gradient(
+    110deg,
+    var(--color-gold-500) 0%,
+    var(--color-gold-500) 38%,
+    #fff3cf 50%,
+    var(--color-gold-500) 62%,
+    var(--color-gold-500) 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 4.5s linear infinite;
+}
+@keyframes shimmer {
+  from { background-position: 120% 0; }
+  to { background-position: -100% 0; }
+}
+
+/* Floating gold dust particles */
+.particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.particle {
+  position: absolute;
+  bottom: -12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(236 208 138 / 0.9), rgb(212 167 59 / 0.1) 70%);
+  opacity: 0;
+  animation: rise linear infinite;
+}
+@keyframes rise {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.65;
+  }
+  85% {
+    opacity: 0.12;
+  }
+  100% {
+    transform: translateY(-92vh) translateX(28px);
+    opacity: 0;
+  }
+}
+
+/* Scroll cue at the bottom of the hero */
+.scroll-cue {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  translate: -50% 0;
+  width: 26px;
+  height: 42px;
+  border: 2px solid rgb(227 188 90 / 0.7);
+  border-radius: 14px;
+}
+.scroll-cue span {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  width: 4px;
+  height: 8px;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: var(--color-gold-400);
+  animation: cue 1.8s ease-in-out infinite;
+}
+@keyframes cue {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  70% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+/* ═══ Marquee ticker ═══ */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-track {
+  display: inline-flex;
+  animation: marquee 26s linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ═══ Card hover: lift + gold glow (targets existing utility-classed cards) ═══ */
+main [class*="rounded-lg"][class*="border-gold-500"] {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+main [class*="rounded-lg"][class*="border-gold-500"]:hover {
+  transform: translateY(-6px);
+  border-color: rgb(212 167 59 / 0.65);
+  box-shadow:
+    0 18px 40px -12px rgb(0 0 0 / 0.55),
+    0 0 24px -6px rgb(212 167 59 / 0.35);
+}
+
+/* Programme card image zoom */
+main article img {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+main article:hover img {
+  transform: scale(1.06);
+}
+
+/* ═══ Gold buttons: shine sweep on hover ═══ */
+a[class*="bg-gold-500"],
+button[class*="bg-gold-500"] {
+  position: relative;
+  overflow: hidden;
+}
+a[class*="bg-gold-500"]::before,
+button[class*="bg-gold-500"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent, rgb(255 255 255 / 0.5), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+a[class*="bg-gold-500"]:hover::before,
+button[class*="bg-gold-500"]:hover::before,
+a[class*="bg-gold-500"]:focus-visible::before,
+button[class*="bg-gold-500"]:focus-visible::before {
+  animation: shine 0.7s ease forwards;
+}
+@keyframes shine {
+  to { left: 130%; }
+}
+
+/* ═══ FAQ accordions ═══ */
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item summary:hover h3 {
+  color: var(--color-gold-300);
+}
+.faq-item h3 {
+  transition: color 0.25s ease;
+}
+.faq-chevron {
+  flex: none;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-item[open] .faq-chevron {
+  transform: rotate(180deg);
+}
+.faq-item[open] .faq-body {
+  animation: faq-in 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes faq-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+/* ═══ Back-to-top button ═══ */
+#back-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 40;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(14px);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#back-top.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+#back-top:hover {
+  transform: translateY(-3px);
+}
+
+/* ═══ Mobile nav ═══ */
 #nav-menu {
   display: none;
 }
 #nav-menu.open {
   display: flex;
+  animation: nav-in 0.25s ease;
+}
+@keyframes nav-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
 }
 @media (min-width: 768px) {
   #nav-menu {
     display: flex !important;
+    animation: none;
+  }
+}
+
+/* ═══ Reduced motion: everything settles instantly ═══ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal,
+  .hero-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .particle,
+  .scroll-cue {
+    display: none;
   }
 }
