@@ -476,15 +476,69 @@ const navLinks = [
                 match and community programme is designed to give the young people of Bethanie a
                 structured, positive path — on and off the field.
               </p>
-              <img
-                src="/img/pitch.webp"
-                alt="Illustrated football pitch in Bethanie United FC purple and gold"
-                width="1200"
-                height="675"
-                loading="lazy"
-                decoding="async"
-                class="mt-4 rounded-lg border border-gold-500/20"
-              />
+              <div class="pitch-wrap mt-6">
+                <svg
+                  id="pitch"
+                  viewBox="0 0 600 340"
+                  role="img"
+                  aria-label="Interactive football pitch in club colours — click or tap to kick the ball"
+                >
+                  <!-- turf + mowing stripes -->
+                  <rect x="0" y="0" width="600" height="340" rx="12" fill="#180b36" />
+                  <rect x="20" y="16" width="70" height="308" fill="#1d0f3f" />
+                  <rect x="160" y="16" width="70" height="308" fill="#1d0f3f" />
+                  <rect x="300" y="16" width="70" height="308" fill="#1d0f3f" />
+                  <rect x="440" y="16" width="70" height="308" fill="#1d0f3f" />
+                  <!-- markings -->
+                  <g fill="none" stroke="#d4a73b" stroke-opacity="0.45" stroke-width="2">
+                    <rect x="20" y="16" width="560" height="308" />
+                    <line x1="300" y1="16" x2="300" y2="324" />
+                    <circle cx="300" cy="170" r="40" />
+                    <rect x="20" y="96" width="88" height="148" />
+                    <rect x="20" y="132" width="34" height="76" />
+                    <path d="M108 140 A 40 40 0 0 1 108 200" />
+                    <rect x="492" y="96" width="88" height="148" />
+                    <rect x="546" y="132" width="34" height="76" />
+                    <path d="M492 140 A 40 40 0 0 0 492 200" />
+                    <path d="M20 26 A 10 10 0 0 0 30 16" />
+                    <path d="M570 16 A 10 10 0 0 0 580 26" />
+                    <path d="M580 314 A 10 10 0 0 0 570 324" />
+                    <path d="M30 324 A 10 10 0 0 0 20 314" />
+                  </g>
+                  <circle cx="300" cy="170" r="3.5" fill="#d4a73b" fill-opacity="0.6" />
+                  <circle cx="76" cy="170" r="3" fill="#d4a73b" fill-opacity="0.6" />
+                  <circle cx="524" cy="170" r="3" fill="#d4a73b" fill-opacity="0.6" />
+                  <!-- goals -->
+                  <g fill="rgb(212 167 59 / 0.08)" stroke="#e3bc5a" stroke-opacity="0.8" stroke-width="2">
+                    <rect x="8" y="140" width="12" height="60" />
+                    <rect x="580" y="140" width="12" height="60" />
+                  </g>
+                  <!-- GOAL! pop -->
+                  <text
+                    id="pitch-goal"
+                    x="300"
+                    y="104"
+                    text-anchor="middle"
+                    font-size="48"
+                    font-family="Archivo Black, Arial Black, sans-serif"
+                    fill="#e3bc5a"
+                    stroke="#14092e"
+                    stroke-width="2"
+                    paint-order="stroke"
+                  >GOAL!</text>
+                  <!-- ball (JS moves + spins this group) -->
+                  <g id="pitch-ball" transform="translate(300 170)">
+                    <circle r="10" fill="#f7f2e7" stroke="#14092e" stroke-width="1.5" />
+                    <path d="M0 -4.5 L4.3 -1.4 L2.6 3.6 L-2.6 3.6 L-4.3 -1.4 Z" fill="#2a1454" />
+                    <circle cx="0" cy="-8" r="1.6" fill="#2a1454" />
+                    <circle cx="7" cy="4" r="1.6" fill="#2a1454" />
+                    <circle cx="-7" cy="4" r="1.6" fill="#2a1454" />
+                  </g>
+                </svg>
+                <p class="mt-2 text-xs text-lav/70">
+                  ⚽ Click or tap the pitch to kick the ball — see if you can score!
+                </p>
+              </div>
             </div>
 
             <!-- Club identity fact card -->
@@ -543,13 +597,20 @@ const navLinks = [
             and surrounding communities can rise from grassroots to elite level.
           </p>
 
-          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {missions.map(({ title, text }) => (
-              <div class="reveal rounded-lg border border-gold-500/20 bg-purple-900 p-6">
-                <h3 class="font-display mb-3 text-base text-gold-500">{title}</h3>
-                <p class="text-sm text-lav">{text}</p>
-              </div>
-            ))}
+          <div class="mission-wrap mt-4">
+            <div class="mission-rail" aria-hidden="true"></div>
+            <ol class="space-y-12 md:space-y-16">
+              {missions.map(({ title, text }, i) => (
+                <li
+                  class={`reveal mission-item ${i % 2 ? 'alt' : ''}`}
+                  data-reveal={i % 2 ? 'right' : 'left'}
+                >
+                  <span class="mission-dot" aria-hidden="true">{i + 1}</span>
+                  <h3 class="font-display mb-2 text-lg text-gold-500">{title}</h3>
+                  <p class="text-sm leading-relaxed text-lav">{text}</p>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
@@ -564,11 +625,12 @@ const navLinks = [
             </h2>
           </div>
 
-          <div class="grid gap-6 sm:grid-cols-2">
-            {impact.map(({ title, text }) => (
-              <div class="reveal rounded-lg border border-gold-500/20 bg-purple-950 p-7">
-                <h3 class="font-display mb-3 text-base text-gold-500">{title}</h3>
-                <p class="text-sm text-lav">{text}</p>
+          <div class="impact-panels reveal">
+            {impact.map(({ title, text }, i) => (
+              <div class="impact-panel" tabindex="0">
+                <span class="impact-index" aria-hidden="true">0{i + 1}</span>
+                <h3 class="impact-title">{title}</h3>
+                <p class="impact-text">{text}</p>
               </div>
             ))}
           </div>
@@ -591,7 +653,8 @@ const navLinks = [
           </div>
 
           <div class="grid gap-8 lg:grid-cols-3">
-            <article class="reveal overflow-hidden rounded-lg border border-gold-500/20 bg-purple-900">
+            <article class="prog-card reveal relative overflow-hidden rounded-lg border border-gold-500/20 bg-purple-900">
+              <span class="prog-num" aria-hidden="true">01</span>
               <img src="/img/team.webp" alt="Football development programme illustration in club colours" width="800" height="600" loading="lazy" decoding="async" class="h-44 w-full object-cover" />
               <div class="p-7">
                 <h3 class="font-display mb-4 text-lg text-gold-500">Football Development</h3>
@@ -609,7 +672,8 @@ const navLinks = [
               </div>
             </article>
 
-            <article class="reveal overflow-hidden rounded-lg border border-gold-500/20 bg-purple-900">
+            <article class="prog-card reveal relative overflow-hidden rounded-lg border border-gold-500/20 bg-purple-900">
+              <span class="prog-num" aria-hidden="true">02</span>
               <img src="/img/community.webp" alt="Community development programme illustration in club colours" width="800" height="600" loading="lazy" decoding="async" class="h-44 w-full object-cover" />
               <div class="p-7">
                 <h3 class="font-display mb-4 text-lg text-gold-500">Community Development</h3>
@@ -623,7 +687,8 @@ const navLinks = [
               </div>
             </article>
 
-            <article class="reveal overflow-hidden rounded-lg border border-gold-500/20 bg-purple-900">
+            <article class="prog-card reveal relative overflow-hidden rounded-lg border border-gold-500/20 bg-purple-900">
+              <span class="prog-num" aria-hidden="true">03</span>
               <img src="/img/talent.webp" alt="Talent development programme illustration in club colours" width="800" height="600" loading="lazy" decoding="async" class="h-44 w-full object-cover" />
               <div class="p-7">
                 <h3 class="font-display mb-4 text-lg text-gold-500">Talent Development</h3>
@@ -649,32 +714,45 @@ const navLinks = [
             </h2>
           </div>
 
-          <ol class="grid gap-6 lg:grid-cols-3">
-            <li class="reveal rounded-lg border border-gold-500/20 bg-purple-950 p-7">
-              <span class="font-display text-3xl text-gold-500" aria-hidden="true">1</span>
-              <h3 class="font-display mb-3 mt-3 text-base text-cream">Local Associations</h3>
-              <p class="text-sm text-lav">
-                Grassroots participation — every young player starts in structured local football
-                with proper coaching and regular game time.
-              </p>
-            </li>
-            <li class="reveal rounded-lg border border-gold-500/20 bg-purple-950 p-7">
-              <span class="font-display text-3xl text-gold-500" aria-hidden="true">2</span>
-              <h3 class="font-display mb-3 mt-3 text-base text-cream">Regional Competitions</h3>
-              <p class="text-sm text-lav">
-                Inter-club leagues and tournaments where our teams compete and players are seen by
-                scouts.
-              </p>
-            </li>
-            <li class="reveal rounded-lg border border-gold-500/20 bg-purple-950 p-7">
-              <span class="font-display text-3xl text-gold-500" aria-hidden="true">3</span>
-              <h3 class="font-display mb-3 mt-3 text-base text-cream">Provincial Structures</h3>
-              <p class="text-sm text-lav">
-                Coordinated development within provincial football structures for players who rise
-                through the ranks.
-              </p>
-            </li>
-          </ol>
+          <div class="pathway-track reveal">
+            <div class="pathway-rail" aria-hidden="true"></div>
+            <span class="pathway-ball" aria-hidden="true">
+              <svg viewBox="0 0 28 28" width="28" height="28">
+                <circle cx="14" cy="14" r="12" fill="#f7f2e7" stroke="#14092e" stroke-width="1.5" />
+                <path d="M14 8.5 L19.2 12.3 L17.2 18.4 L10.8 18.4 L8.8 12.3 Z" fill="#2a1454" />
+                <circle cx="14" cy="4.5" r="1.8" fill="#2a1454" />
+                <circle cx="22.5" cy="18" r="1.8" fill="#2a1454" />
+                <circle cx="5.5" cy="18" r="1.8" fill="#2a1454" />
+              </svg>
+            </span>
+
+            <ol class="grid gap-10 lg:grid-cols-3">
+              <li class="pathway-step">
+                <span class="step-node" aria-hidden="true">1</span>
+                <h3 class="font-display mb-3 text-base text-cream">Local Associations</h3>
+                <p class="text-sm text-lav">
+                  Grassroots participation — every young player starts in structured local football
+                  with proper coaching and regular game time.
+                </p>
+              </li>
+              <li class="pathway-step">
+                <span class="step-node" aria-hidden="true">2</span>
+                <h3 class="font-display mb-3 text-base text-cream">Regional Competitions</h3>
+                <p class="text-sm text-lav">
+                  Inter-club leagues and tournaments where our teams compete and players are seen by
+                  scouts.
+                </p>
+              </li>
+              <li class="pathway-step">
+                <span class="step-node" aria-hidden="true">3</span>
+                <h3 class="font-display mb-3 text-base text-cream">Provincial Structures</h3>
+                <p class="text-sm text-lav">
+                  Coordinated development within provincial football structures for players who rise
+                  through the ranks.
+                </p>
+              </li>
+            </ol>
+          </div>
 
           <p class="reveal mt-10 max-w-3xl text-lg text-cream">
             Our structures create clear pathways from grassroots participation to elite
@@ -1159,6 +1237,77 @@ const navLinks = [
             const el = e.target.closest('a, button, summary');
             if (el && el.id !== 'sfx-toggle') clickSfx();
           });
+        }
+
+        /* Interactive pitch: click/tap to kick the ball; score in a goal for GOAL! */
+        const pitch = document.getElementById('pitch');
+        if (pitch) {
+          const ball = document.getElementById('pitch-ball');
+          const goal = document.getElementById('pitch-goal');
+          let bx = 300;
+          let by = 170;
+          let rot = 0;
+          let raf = null;
+          let lastUser = 0;
+          const draw = () =>
+            ball.setAttribute('transform', 'translate(' + bx + ' ' + by + ') rotate(' + rot + ')');
+          const checkGoal = () => {
+            const scored = (bx <= 44 || bx >= 556) && by > 132 && by < 208;
+            if (!scored) return;
+            goal.classList.remove('show');
+            requestAnimationFrame(() => goal.classList.add('show'));
+            if (sfxOn && ctx) whistle();
+            setTimeout(() => {
+              goal.classList.remove('show');
+              kick(300, 170, false);
+            }, 1200);
+          };
+          const kick = (tx, ty, user) => {
+            tx = Math.max(30, Math.min(570, tx));
+            ty = Math.max(26, Math.min(314, ty));
+            const sx = bx;
+            const sy = by;
+            const sr = rot;
+            const dx = tx - sx;
+            const dy = ty - sy;
+            const dist = Math.hypot(dx, dy);
+            if (dist < 2) return;
+            if (user) {
+              lastUser = performance.now();
+              if (sfxOn && ctx) tone(160, 0.09, 'sine', 0.07);
+            }
+            const dur = reduce ? 1 : Math.min(1300, 260 + dist * 2.4);
+            const spin = (dist / 63) * 360 * (dx < 0 ? -1 : 1);
+            const t0 = performance.now();
+            cancelAnimationFrame(raf);
+            const step = (now) => {
+              const t = Math.min(1, (now - t0) / dur);
+              const e = 1 - Math.pow(1 - t, 3);
+              bx = sx + dx * e;
+              by = sy + dy * e;
+              rot = sr + spin * e;
+              draw();
+              if (t < 1) raf = requestAnimationFrame(step);
+              else if (user) checkGoal();
+            };
+            raf = requestAnimationFrame(step);
+          };
+          pitch.addEventListener('pointerdown', (ev) => {
+            const r = pitch.getBoundingClientRect();
+            kick(
+              ((ev.clientX - r.left) / r.width) * 600,
+              ((ev.clientY - r.top) / r.height) * 340,
+              true
+            );
+          });
+          /* Idle: the ball wanders on its own until someone plays with it */
+          if (!reduce) {
+            setInterval(() => {
+              if (performance.now() - lastUser > 8000) {
+                kick(80 + Math.random() * 440, 60 + Math.random() * 220, false);
+              }
+            }, 5000);
+          }
         }
       })();
     </script>
