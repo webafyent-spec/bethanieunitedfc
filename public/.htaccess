@@ -1,0 +1,57 @@
+# ── Bethanie United FC · cPanel / Apache config ──────────────────────────────
+
+Options -Indexes
+
+# ── Redirect apex → www (canonical) ──────────────────────────────────────────
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^bethanieunitedfc\.co\.za$ [NC]
+RewriteRule ^ https://www.bethanieunitedfc.co.za%{REQUEST_URI} [R=301,L]
+
+# ── Force HTTPS ───────────────────────────────────────────────────────────────
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# ── Serve pre-compressed files if the browser accepts them ───────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+# ── Cache-Control headers ─────────────────────────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # HTML — no cache (new deploy = new file)
+  <FilesMatch "\.(html)$">
+    ExpiresDefault "access plus 0 seconds"
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  </FilesMatch>
+
+  # CSS / JS (Astro fingerprints filenames)
+  <FilesMatch "\.(css|js)$">
+    ExpiresDefault "access plus 1 year"
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Images and fonts
+  <FilesMatch "\.(webp|avif|jpg|jpeg|png|gif|svg|ico|woff2|woff|ttf)$">
+    ExpiresDefault "access plus 30 days"
+    Header set Cache-Control "public, max-age=2592000, stale-while-revalidate=86400"
+  </FilesMatch>
+
+  # Manifests, txt, xml
+  <FilesMatch "\.(webmanifest|txt|xml)$">
+    ExpiresDefault "access plus 1 day"
+    Header set Cache-Control "public, max-age=86400"
+  </FilesMatch>
+</IfModule>
+
+# ── Security headers ──────────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+# ── Custom 404 ────────────────────────────────────────────────────────────────
+ErrorDocument 404 /index.html
