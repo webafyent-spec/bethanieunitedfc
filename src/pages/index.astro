@@ -382,21 +382,24 @@ const navLinks = [
     <main id="main">
       <!-- ═══ 01 HERO ═══ -->
       <section id="top" class="relative flex min-h-screen items-center overflow-hidden pt-20" aria-label="Introduction">
-        <picture>
-          <source srcset="/img/hero.avif" type="image/avif" />
-          <source srcset="/img/hero.webp" type="image/webp" />
-          <img
-            src="/img/hero.webp"
-            alt="Stadium-style purple and gold backdrop with the Bethanie United FC crest"
-            width="1600"
-            height="900"
-            fetchpriority="high"
-            loading="eager"
-            decoding="async"
-            class="kenburns absolute inset-0 h-full w-full object-cover"
-          />
-        </picture>
-        <div class="absolute inset-0 bg-gradient-to-t from-purple-950 via-purple-950/70 to-purple-900/40" aria-hidden="true"></div>
+        <!-- Deep purple base gradient -->
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-800 via-purple-950 to-purple-950" aria-hidden="true"></div>
+        <!-- Crocodile-scale texture -->
+        <div class="croc-scales absolute inset-0 opacity-60" aria-hidden="true"></div>
+        <!-- BUFC crest — large watermark right side -->
+        <img
+          src="/img/hero-crest.png"
+          alt=""
+          aria-hidden="true"
+          width="700"
+          height="700"
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+          class="absolute -right-16 top-1/2 w-[520px] max-w-[55vw] -translate-y-1/2 opacity-25 sm:w-[580px] lg:-right-8 lg:w-[640px] lg:opacity-30 xl:opacity-35 select-none pointer-events-none"
+        />
+        <!-- Bottom fade so crest blends into sections below -->
+        <div class="absolute inset-0 bg-gradient-to-t from-purple-950 via-transparent to-transparent" aria-hidden="true"></div>
 
         <div class="particles" aria-hidden="true">
           {particles.map(({ left, size, duration, delay }) => (
