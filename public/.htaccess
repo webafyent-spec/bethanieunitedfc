@@ -1,6 +1,7 @@
 # ── Bethanie United FC · cPanel / Apache config ──────────────────────────────
 
 Options -Indexes
+AddDefaultCharset UTF-8
 
 # ── Redirect apex → www (canonical) ──────────────────────────────────────────
 RewriteEngine On
