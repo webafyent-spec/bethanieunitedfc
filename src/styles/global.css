@@ -757,3 +757,53 @@ button[class*="bg-gold-500"]:focus-visible::before {
     display: none;
   }
 }
+
+/* ═══ Gallery + lightbox ═══ */
+.gallery-link {
+  overflow: hidden;
+  cursor: zoom-in;
+}
+.gallery-link img {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.gallery-link:hover img,
+.gallery-link:focus-visible img {
+  transform: scale(1.04);
+}
+.lightbox {
+  max-width: min(94vw, 1200px);
+  max-height: 94vh;
+  margin: auto;
+  padding: 0.75rem;
+  border: 1px solid rgb(212 167 59 / 0.5);
+  border-radius: 0.5rem;
+  background: var(--color-purple-950);
+  color: var(--color-cream);
+  text-align: center;
+}
+.lightbox::backdrop {
+  background: rgb(10 4 24 / 0.9);
+}
+.lightbox img {
+  max-width: 100%;
+  max-height: 80vh;
+  margin: 0 auto;
+  border-radius: 0.25rem;
+}
+.lightbox p {
+  padding-top: 0.6rem;
+  font-size: 0.9rem;
+}
+.lightbox-close {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.6rem;
+  z-index: 1;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  background: var(--color-gold-500);
+  color: var(--color-purple-950);
+  font-size: 1.5rem;
+  line-height: 1;
+}

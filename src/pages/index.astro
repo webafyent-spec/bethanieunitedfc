@@ -216,6 +216,24 @@ const particles = Array.from({ length: 14 }, (_, i) => ({
   delay: (i * 1.7) % 9,
 }));
 
+const gallery = [
+  { src: '/img/gallery-invitational-poster.webp', w: 800, h: 1200, alt: 'Match poster for the MMC Poppy Lebethe Invitational Football Tournament, Bethanie United East versus Bethanie United West, Sunday 20 September 2026 at Bethanie Sports Grounds', cap: 'MMC Poppy Lebethe Invitational: Bethanie United East vs West' },
+  { src: '/img/gallery-team-red.webp', w: 1000, h: 450, alt: 'Bethanie United FC junior players in red kit posing together on the pitch with the hills of Bethanie behind them', cap: 'Our juniors, ready to play' },
+  { src: '/img/gallery-lineup.webp', w: 1000, h: 450, alt: 'Two junior teams lined up on the halfway line before kick-off', cap: 'Teams lined up before kick-off' },
+  { src: '/img/gallery-thank-you.webp', w: 800, h: 1200, alt: 'Thank-you poster from the Bethanie United FC family after the MMC Poppy Lebethe Invitational Tournament, naming Spanish Eagles FC, Shorty FC, Bethanie Superstrikers FC and Bethanie United FC', cap: 'Thank you to Spanish Eagles FC, Shorty FC, Bethanie Superstrikers FC and everyone who made the tournament a success' },
+  { src: '/img/gallery-clinic.webp', w: 1000, h: 562, alt: 'Young players seated on the grass with footballs during a Madibeng Local Football Association event at Bethanie', cap: 'Madibeng Local Football Association event' },
+  { src: '/img/gallery-sideline.webp', w: 1000, h: 450, alt: 'Young players on the sideline watching a match at Bethanie Sports Grounds', cap: 'On the touchline at Bethanie Sports Grounds' },
+  { src: '/img/gallery-training.webp', w: 1000, h: 450, alt: 'Children playing football on the training pitch at Bethanie with portable goals', cap: 'Training day at Bethanie' },
+];
+
+const partnershipAreas = [
+  'Coaching and knowledge exchange',
+  'Youth player development',
+  'Friendly matches and football experiences',
+  'Club administration, marketing and sponsorship ideas',
+  'Cross-cultural friendship through sport',
+];
+
 const navLinks = [
   { href: '#about', label: 'About' },
   { href: '#programmes', label: 'Programmes' },
@@ -901,11 +919,38 @@ const navLinks = [
         </div>
       </section>
 
+      <!-- ═══ 08 GALLERY ═══ -->
+      <section id="gallery" aria-labelledby="gallery-h" class="croc-scales bg-purple-900">
+        <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
+          <div class="reveal mb-4 flex items-end gap-5">
+            <span class="section-num" aria-hidden="true">08</span>
+            <h2 id="gallery-h" class="font-display text-2xl text-cream sm:text-4xl">
+              Treasured <span class="text-gold-500">Moments</span>
+            </h2>
+          </div>
+          <p class="reveal mb-12 max-w-3xl text-lg text-lav">
+            From match days to training sessions and community events, these are the moments that
+            make Bethanie United FC more than a football club. Tap a photo to view it larger.
+          </p>
+
+          <div class="gap-4 sm:columns-2 lg:columns-3">
+            {gallery.map(({ src, w, h, alt, cap }) => (
+              <figure class="reveal mb-4 break-inside-avoid overflow-hidden rounded-lg border border-gold-500/20 bg-purple-950" data-reveal="zoom">
+                <a href={src} class="gallery-link block" data-lightbox data-caption={cap}>
+                  <img src={src} alt={alt} width={w} height={h} loading="lazy" decoding="async" class="h-auto w-full" />
+                </a>
+                <figcaption class="px-4 py-3 text-sm text-lav">{cap}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <!-- ═══ 09 LEADERSHIP ═══ -->
       <section id="leadership" aria-labelledby="leadership-h" class="bg-purple-950">
         <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
           <div class="reveal mb-12 flex items-end gap-5">
-            <span class="section-num" aria-hidden="true">08</span>
+            <span class="section-num" aria-hidden="true">09</span>
             <h2 id="leadership-h" class="font-display text-2xl text-cream sm:text-4xl">
               Board of <span class="text-gold-500">Directors</span>
             </h2>
@@ -930,11 +975,68 @@ const navLinks = [
         </div>
       </section>
 
-      <!-- ═══ 10 FAQ ═══ -->
+      <!-- ═══ 10 INTERNATIONAL PARTNERSHIP ═══ -->
+      <section id="partnership" aria-labelledby="partnership-h" class="border-y-2 border-gold-500/40 bg-purple-950">
+        <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
+          <div class="reveal mb-12 flex items-end gap-5">
+            <span class="section-num" aria-hidden="true">10</span>
+            <h2 id="partnership-h" class="font-display text-2xl text-cream sm:text-4xl">
+              International <span class="text-gold-500">Football Partnership</span>
+            </h2>
+          </div>
+
+          <figure class="reveal overflow-hidden rounded-lg border border-gold-500/30" data-reveal="zoom">
+            <img src="/img/partnership-nk-ilirium.webp" alt="International Football Partnership graphic: Bethanie United FC of Bethanie, North West, South Africa and NK Ilirium of Zagreb, Croatia. Connecting communities, sharing knowledge, developing talent." width="1280" height="853" loading="lazy" decoding="async" class="h-auto w-full" />
+          </figure>
+
+          <div class="mt-12 grid gap-10 lg:grid-cols-2">
+            <div class="reveal">
+              <h3 class="font-display mb-4 text-lg text-gold-500">Bethanie United FC × NK Ilirium</h3>
+              <p class="mb-4 text-cream">
+                Bethanie United FC has formed an international partnership with NK Ilirium
+                (Nogometni klub Ilirium), a football club based in Zagreb, Croatia. Two clubs, two
+                countries, one love of football.
+              </p>
+              <p class="text-lav">
+                The partnership connects communities, shares knowledge and develops talent, giving
+                our players and officials a window onto football far beyond Bethanie.
+              </p>
+              <ul class="mt-6 space-y-2 text-sm text-cream">
+                {partnershipAreas.map((item) => (
+                  <li class="flex items-center gap-3">
+                    <span class="h-1.5 w-4 bg-gold-500" aria-hidden="true"></span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="reveal grid gap-6 sm:grid-cols-2">
+              <div class="rounded-lg border border-gold-500/20 bg-purple-900 p-6">
+                <h3 class="font-display mb-2 text-base text-gold-500">Bethanie United FC</h3>
+                <p class="text-sm text-lav">
+                  Community football club in Bethanie, North West, South Africa, focused on youth
+                  development, football excellence, social cohesion and community empowerment.
+                </p>
+              </div>
+              <div class="rounded-lg border border-gold-500/20 bg-purple-900 p-6">
+                <h3 class="font-display mb-2 text-base text-gold-500">NK Ilirium</h3>
+                <p class="text-sm text-lav">
+                  Football club based in Zagreb, Croatia, playing in Zagreb-area senior amateur
+                  football.
+                  <a href="https://nkilirium.com" rel="noopener noreferrer" class="font-semibold text-gold-400 hover:text-gold-300">nkilirium.com</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 11 FAQ ═══ -->
       <section id="faq" aria-labelledby="faq-h" class="croc-scales bg-purple-900">
         <div class="mx-auto max-w-4xl px-4 py-20 sm:px-6 sm:py-24">
           <div class="reveal mb-12 flex items-end gap-5">
-            <span class="section-num" aria-hidden="true">09</span>
+            <span class="section-num" aria-hidden="true">11</span>
             <h2 id="faq-h" class="font-display text-2xl text-cream sm:text-4xl">
               Frequently Asked <span class="text-gold-500">Questions</span>
             </h2>
@@ -956,11 +1058,11 @@ const navLinks = [
         </div>
       </section>
 
-      <!-- ═══ 11 CONTACT ═══ -->
+      <!-- ═══ 12 CONTACT ═══ -->
       <section id="contact" aria-labelledby="contact-h" class="bg-purple-950">
         <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
           <div class="reveal mb-12 flex items-end gap-5">
-            <span class="section-num" aria-hidden="true">10</span>
+            <span class="section-num" aria-hidden="true">12</span>
             <h2 id="contact-h" class="font-display text-2xl text-cream sm:text-4xl">
               Contact <span class="text-gold-500">the Club</span>
             </h2>
@@ -1098,7 +1200,7 @@ const navLinks = [
           <nav aria-label="Footer navigation">
             <h2 class="font-display mb-4 text-sm text-gold-500">Explore</h2>
             <ul class="space-y-2 text-sm">
-              {[...navLinks, { href: '#roadmap', label: 'Roadmap' }, { href: '#faq', label: 'FAQ' }].map(({ href, label }) => (
+              {[...navLinks, { href: '#roadmap', label: 'Roadmap' }, { href: '#gallery', label: 'Gallery' }, { href: '#partnership', label: 'Partnership' }, { href: '#faq', label: 'FAQ' }].map(({ href, label }) => (
                 <li><a href={href} class="text-lav hover:text-gold-400">{label}</a></li>
               ))}
             </ul>
@@ -1129,6 +1231,13 @@ const navLinks = [
         </div>
       </div>
     </footer>
+
+    <!-- Gallery lightbox -->
+    <dialog id="lightbox" class="lightbox" aria-label="Photo viewer">
+      <button type="button" id="lightbox-close" aria-label="Close photo" class="lightbox-close">&times;</button>
+      <img id="lightbox-img" alt="" />
+      <p id="lightbox-cap"></p>
+    </dialog>
 
     <!-- Back to top -->
     <button
@@ -1161,6 +1270,25 @@ const navLinks = [
               t.setAttribute('aria-expanded', 'false');
             })
           );
+        }
+
+        /* Gallery lightbox (links still open the image if JS is off) */
+        const lb = document.getElementById('lightbox');
+        if (lb && lb.showModal) {
+          const lbImg = document.getElementById('lightbox-img');
+          const lbCap = document.getElementById('lightbox-cap');
+          document.querySelectorAll('[data-lightbox]').forEach((a) =>
+            a.addEventListener('click', (e) => {
+              e.preventDefault();
+              const img = a.querySelector('img');
+              lbImg.src = a.href;
+              lbImg.alt = img ? img.alt : '';
+              lbCap.textContent = a.dataset.caption || '';
+              lb.showModal();
+            })
+          );
+          document.getElementById('lightbox-close').addEventListener('click', () => lb.close());
+          lb.addEventListener('click', (e) => { if (e.target === lb) lb.close(); });
         }
 
         /* Scroll reveals with stagger */
