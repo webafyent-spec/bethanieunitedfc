@@ -1,0 +1,213 @@
+---
+import '../styles/global.css';
+import { gallery } from '../data/gallery';
+
+const DOMAIN = 'https://www.bethanieunitedfc.co.za';
+const URL = `${DOMAIN}/gallery/`;
+const NAME = 'Bethanie United Football Club';
+const LEGAL_NAME = 'Bethanie United Football Club NPC';
+const REG_NO = '2026/444177/08';
+const PBO_NO = '930090969';
+const TITLE = 'Treasured Moments Gallery | Bethanie United FC';
+const DESCRIPTION =
+  'Photos and posters from Bethanie United FC in Bethanie, North West: match days, junior teams, training sessions, the MMC Poppy Lebethe Invitational Tournament and community football events.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ImageGallery',
+      '@id': `${URL}#gallery`,
+      url: URL,
+      name: 'Treasured Moments',
+      description: DESCRIPTION,
+      isPartOf: { '@id': `${DOMAIN}/#website` },
+      about: { '@id': `${DOMAIN}/#club` },
+      image: gallery.map(({ src, alt, cap }) => ({
+        '@type': 'ImageObject',
+        contentUrl: `${DOMAIN}${src}`,
+        caption: cap,
+        description: alt,
+      })),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+        { '@type': 'ListItem', position: 2, name: 'Treasured Moments', item: URL },
+      ],
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en-ZA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{TITLE}</title>
+    <meta name="description" content={DESCRIPTION} />
+    <link rel="canonical" href={URL} />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="theme-color" content="#2a1454" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={URL} />
+    <meta property="og:site_name" content={NAME} />
+    <meta property="og:title" content={TITLE} />
+    <meta property="og:description" content={DESCRIPTION} />
+    <meta property="og:image" content={`${DOMAIN}/og-image.jpg`} />
+    <meta property="og:locale" content="en_ZA" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={TITLE} />
+    <meta name="twitter:description" content={DESCRIPTION} />
+    <meta name="twitter:image" content={`${DOMAIN}/og-image.jpg`} />
+
+    <meta name="geo.region" content="ZA-NW" />
+    <meta name="geo.placename" content="Bethanie, Brits, Madibeng, North West Province, South Africa" />
+
+    <link rel="icon" href="/icon-192.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;700&display=swap"
+      />
+    </noscript>
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+
+  <body class="bg-purple-950 font-body text-cream">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <header id="site-header" class="fixed inset-x-0 top-0 z-50 border-b border-gold-500/20 bg-purple-950/90 backdrop-blur">
+      <nav aria-label="Main navigation" class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+        <a href="/" class="flex items-center gap-3">
+          <img src="/img/bethamie_logo.png" alt="Bethanie United FC crest" width="44" height="44" loading="eager" decoding="async" class="logo-img h-11 w-11" />
+          <span class="font-display text-sm leading-tight tracking-wide text-cream sm:text-base">
+            BETHANIE UNITED <span class="text-gold-500">FC</span>
+          </span>
+        </a>
+        <div class="flex items-center gap-5">
+          <a href="/" class="text-sm font-semibold text-cream transition hover:text-gold-400">Home</a>
+          <a href="/#contact" class="rounded bg-gold-500 px-4 py-2 text-sm font-bold text-purple-950 transition hover:bg-gold-400">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section aria-labelledby="gallery-h" class="croc-scales min-h-screen bg-purple-900 pt-20">
+        <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+          <p class="mb-6 text-sm text-lav">
+            <a href="/" class="text-gold-400 hover:text-gold-300">Home</a>
+            <span aria-hidden="true"> / </span>
+            <span>Treasured Moments</span>
+          </p>
+
+          <div class="mb-4">
+            <h1 id="gallery-h" class="font-display text-3xl text-cream sm:text-5xl">
+              Treasured <span class="text-gold-500">Moments</span>
+            </h1>
+          </div>
+          <p class="mb-12 max-w-3xl text-lg text-lav">
+            From match days to training sessions and community events, these are the moments that
+            make Bethanie United FC more than a football club. Tap a photo to view it larger.
+          </p>
+
+          <div class="gap-4 sm:columns-2 lg:columns-3">
+            {gallery.map(({ src, w, h, alt, cap }) => (
+              <figure class="reveal mb-4 break-inside-avoid overflow-hidden rounded-lg border border-gold-500/20 bg-purple-950" data-reveal="zoom">
+                <a href={src} class="gallery-link block" data-lightbox data-caption={cap}>
+                  <img src={src} alt={alt} width={w} height={h} loading="lazy" decoding="async" class="h-auto w-full" />
+                </a>
+                <figcaption class="px-4 py-3 text-sm text-lav">{cap}</figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <div class="mt-12">
+            <a href="/" class="inline-block rounded border border-gold-500/60 px-6 py-3 font-bold text-gold-400 transition hover:bg-gold-500 hover:text-purple-950">
+              &larr; Back to Home
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-gold-500/20 bg-purple-950">
+      <div class="mx-auto max-w-6xl px-4 py-8 text-sm text-lav sm:px-6">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 {LEGAL_NAME} · Reg no. {REG_NO} · PBO no. {PBO_NO}</p>
+          <p>
+            Website by
+            <a href="https://webafy.co.za" rel="noopener noreferrer" class="font-semibold text-gold-400 hover:text-gold-300">Webafy — webafy.co.za</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <dialog id="lightbox" class="lightbox" aria-label="Photo viewer">
+      <button type="button" id="lightbox-close" aria-label="Close photo" class="lightbox-close">&times;</button>
+      <img id="lightbox-img" alt="" />
+      <p id="lightbox-cap"></p>
+    </dialog>
+
+    <script is:inline>
+      (() => {
+        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        /* Lightbox (links still open the image if JS is off) */
+        const lb = document.getElementById('lightbox');
+        if (lb && lb.showModal) {
+          const lbImg = document.getElementById('lightbox-img');
+          const lbCap = document.getElementById('lightbox-cap');
+          document.querySelectorAll('[data-lightbox]').forEach((a) =>
+            a.addEventListener('click', (e) => {
+              e.preventDefault();
+              const img = a.querySelector('img');
+              lbImg.src = a.href;
+              lbImg.alt = img ? img.alt : '';
+              lbCap.textContent = a.dataset.caption || '';
+              lb.showModal();
+            })
+          );
+          document.getElementById('lightbox-close').addEventListener('click', () => lb.close());
+          lb.addEventListener('click', (e) => { if (e.target === lb) lb.close(); });
+        }
+
+        /* Scroll reveals */
+        const els = document.querySelectorAll('.reveal');
+        if (!reduce && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.filter((e) => e.isIntersecting).forEach((e, i) => {
+                e.target.style.transitionDelay = i * 90 + 'ms';
+                e.target.classList.add('in');
+                io.unobserve(e.target);
+              });
+            },
+            { threshold: 0.12 }
+          );
+          els.forEach((el) => io.observe(el));
+        } else {
+          els.forEach((el) => el.classList.add('in'));
+        }
+      })();
+    </script>
+  </body>
+</html>
